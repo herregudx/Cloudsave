@@ -55,6 +55,7 @@ def read_variables_from_json(filename):
 
 
 def menu():
+    # Simple user menu
     print("\nLocal folder: " + local + "\nCloud folder: " + cloud)
     userchoice = input("\n[B]ackup to cloud     [R]estore from cloud      [Q]uit\nYour choice: ")
     if userchoice.upper() == "B":
