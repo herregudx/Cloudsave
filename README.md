@@ -5,4 +5,4 @@ If the files you are trying to replace is newer than the files you are copying, 
 The reason I made this was because I was tired of manually copying save-games on a Steam game that didn't support Steam Cloud.
 
 How to use: Replace the filepath you want to copy to and from in the file "filepaths.json", then launch main.py.
-
+There is a Windows executable in the Build-folder if you do not have Python installed. I do however recommend to never run executables found on GitHub unless you really trust the source.
