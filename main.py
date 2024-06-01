@@ -1,4 +1,5 @@
 import os
+import sys
 import shutil
 import json
 import tkinter as tk
@@ -65,7 +66,7 @@ def button_restore():
 
 # Function for quit button
 def button_quit():
-    exit()
+    sys.exit()
 
 # Create the main window
 root = tk.Tk()
