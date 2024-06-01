@@ -54,7 +54,6 @@ def read_variables_from_json(filename):
             raise ValueError(messagebox.showinfo("The JSON file does not contain the required variables."))
     return localvariable, cloudvariable
 
-# Graphical user interface
 
 # Function for save button
 def button_backup():
