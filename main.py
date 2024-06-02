@@ -42,7 +42,6 @@ def copy_folder_contents(source_folder, destination_folder):
             # Copy files
             shutil.copy2(source_item, destination_item)
 
-    #print(f"\nAll contents from '{source_folder}' have been copied to '{destination_folder}'.\n")
     messagebox.showinfo("Done", f"All contents from '{source_folder}' have been copied to '{destination_folder}'.")
 
 def read_variables_from_json(filename):
@@ -68,17 +67,17 @@ def button_restore():
 def button_quit():
     sys.exit()
 
-# Create the main window
+# Create main window
 root = tk.Tk()
 root.title("Cloudsave")
 
-# Create a label
+# Create label
 local, cloud = read_variables_from_json('filepaths.json')
 label_text = f" Local folder: {local}  \n Cloud folder: {cloud}  "
 label = tk.Label(root, text=label_text, anchor='w', justify='left')
 label.pack(pady=10, fill='x')
 
-# Create a frame to hold the buttons
+# Create frame
 button_frame = tk.Frame(root)
 button_frame.pack(pady=10)
 
