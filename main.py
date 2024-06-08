@@ -9,7 +9,7 @@ from datetime import datetime
 def copy_folder_contents(source_folder, destination_folder):
     # Ensure the source folder exists
     if not os.path.exists(source_folder):
-        messagebox.showinfo("Warning", f"\nSource folder '{source_folder}' does not exist.\n")
+        messagebox.showwarning("Warning", f"\nSource folder '{source_folder}' does not exist.\n")
         return
 
     # Ensure the destination folder exists, create it if not
@@ -28,7 +28,7 @@ def copy_folder_contents(source_folder, destination_folder):
                 source_mtime = os.path.getmtime(source_item)
                 destination_mtime = os.path.getmtime(destination_item)
                 if destination_mtime > source_mtime:
-                    messagebox.showinfo("Warning", f"Directory '{destination_item}' is newer than the source. Aborting copy.\n")
+                    messagebox.showwarning("Warning", f"Directory '{destination_item}' is newer than the source. Aborting copy.\n")
                     return
             shutil.copytree(source_item, destination_item, dirs_exist_ok=True)
         else:
@@ -37,7 +37,7 @@ def copy_folder_contents(source_folder, destination_folder):
                 source_mtime = os.path.getmtime(source_item)
                 destination_mtime = os.path.getmtime(destination_item)
                 if destination_mtime > source_mtime:
-                    messagebox.showinfo("Warning", f"File '{destination_item}' is newer than the source. Aborting copy.")
+                    messagebox.showwarning("Warning", f"File '{destination_item}' is newer than the source. Aborting copy.")
                     return
             # Copy files
             shutil.copy2(source_item, destination_item)
@@ -48,10 +48,13 @@ def read_variables_from_json(filename):
     # Read user defined folders from json-file
     with open(filename, 'r') as file:
         data = json.load(file)
-        localvariable = data.get('local')
-        cloudvariable = data.get('cloud')
-        if localvariable is None or cloudvariable is None:
-            raise ValueError(messagebox.showinfo("The JSON file does not contain the required variables."))
+        try:
+            localvariable = data.get('local')
+            cloudvariable = data.get('cloud')
+            if localvariable is None or cloudvariable is None:
+                raise ValueError(messagebox.showerror("Error", "The file config.json does not contain the required variables."))
+        except:
+            sys.exit()
     return localvariable, cloudvariable
 
 
@@ -72,7 +75,7 @@ root = tk.Tk()
 root.title("Cloudsave")
 
 # Create label
-local, cloud = read_variables_from_json('filepaths.json')
+local, cloud = read_variables_from_json('config.json')
 label_text = f" Local folder: {local}  \n Cloud folder: {cloud}  "
 label = tk.Label(root, text=label_text, anchor='w', justify='left')
 label.pack(pady=10, fill='x')
