@@ -47,7 +47,10 @@ def copy_folder_contents(source_folder, destination_folder):
 def read_variables_from_json(filename):
     # Read user defined folders from json-file
     with open(filename, 'r') as file:
-        data = json.load(file)
+        try:
+            data = json.load(file)
+        except ValueError:
+            messagebox.showerror("Error", "Encoding error in config.json. Remember to use forward slash instead of back slash in the filepaths.")
         try:
             localvariable = data.get('local')
             cloudvariable = data.get('cloud')
